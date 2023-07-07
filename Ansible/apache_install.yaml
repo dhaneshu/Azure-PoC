@@ -1,0 +1,29 @@
+- name: Install apache Web Server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Change Apache Port
+      lineinfile:
+        path: /etc/apache2/ports.conf
+        regexp: '^Listen'
+        line: 'Listen 8080'
+        backup: yes
+
+    - name: Create Custom Web Page
+      copy:
+        content: "<html><body><h1>Welcome to Dhanesh's website!</h1></body></html>"
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
