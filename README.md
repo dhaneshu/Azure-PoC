@@ -85,3 +85,6 @@ terraform workspace select poc
 
 7. Run ```terraform plan``` and validate the output
 8. Create the resources by running ```terraform apply```
+
+
+

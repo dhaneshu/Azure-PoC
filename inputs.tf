@@ -26,8 +26,18 @@ locals {
   }
   webserver_input_raw = {
     poc = {
-      name = "vm-web-${terrform.workspace}"
+      name = "vm-web-${terraform.workspace}"
       size = "Standard_DS1_v2"
+    }
+
+    test = {}
+
+  }
+
+  vmss_input_raw = {
+    poc = {
+      name = "vmss-${terraform.workspace}"
+      sku  = "Standard_B2s"
     }
 
     test = {}
@@ -36,4 +46,5 @@ locals {
 
   common_values = local.common_values_raw[terraform.workspace]
   network_input = local.network_input_raw[terraform.workspace]
+  vmss_input    = local.vmss_input_raw[terraform.workspace]
 }
